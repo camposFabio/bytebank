@@ -1,4 +1,4 @@
-import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/models.dart';
 import 'package:flutter/material.dart';
 
@@ -15,11 +15,13 @@ class _ContactFormState extends State<ContactForm> {
   final TextEditingController _accountNumberController =
       TextEditingController();
 
+  final ContactDao _dao = ContactDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('New Contact'),
+        title: const Text('New Contact'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -27,15 +29,15 @@ class _ContactFormState extends State<ContactForm> {
           children: [
             TextField(
               controller: _nameController,
-              decoration: InputDecoration(labelText: 'Full Name'),
-              style: TextStyle(fontSize: 24.0),
+              decoration: const InputDecoration(labelText: 'Full Name'),
+              style: const TextStyle(fontSize: 24.0),
             ),
             Padding(
               padding: const EdgeInsets.only(top: 8.0),
               child: TextField(
                 controller: _accountNumberController,
-                decoration: InputDecoration(labelText: 'Account Number'),
-                style: TextStyle(fontSize: 24.0),
+                decoration: const InputDecoration(labelText: 'Account Number'),
+                style: const TextStyle(fontSize: 24.0),
                 keyboardType: TextInputType.number,
               ),
             ),
@@ -51,11 +53,11 @@ class _ContactFormState extends State<ContactForm> {
 
                     final Contact newContact = Contact(
                         id: 0, name: name, accountNumber: accountNumber);
-                    save(newContact).then(
-                      (id) => Navigator.pop(context),
-                    );
+                    _dao.save(newContact).then(
+                          (id) => Navigator.pop(context),
+                        );
                   },
-                  child: Text('Create'),
+                  child: const Text('Create'),
                 ),
               ),
             ),

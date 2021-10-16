@@ -1,4 +1,4 @@
-import 'package:bytebank/database/app_database.dart';
+import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/models.dart';
 import 'package:bytebank/screens/screens.dart';
 import 'package:flutter/material.dart';
@@ -11,15 +11,17 @@ class ContactsList extends StatefulWidget {
 }
 
 class _ContactsListState extends State<ContactsList> {
+  final ContactDao _dao = ContactDao();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Contacts'),
+          title: const Text('Contacts'),
         ),
         body: FutureBuilder<List<Contact>>(
           initialData: const [],
-          future: findAll(),
+          future: _dao.findAll(),
           builder: (context, snapshot) {
             switch (snapshot.connectionState) {
               case ConnectionState.none:
@@ -29,7 +31,7 @@ class _ContactsListState extends State<ContactsList> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
+                    children: const [
                       CircularProgressIndicator(),
                       Text('Loading...'),
                     ],
@@ -48,7 +50,7 @@ class _ContactsListState extends State<ContactsList> {
                 }
                 break;
             }
-            return Text('Unknow Error');
+            return const Text('Unknow Error');
           },
         ),
         floatingActionButton: FloatingActionButton(
@@ -56,14 +58,14 @@ class _ContactsListState extends State<ContactsList> {
             Navigator.of(context)
                 .push(
               MaterialPageRoute(
-                builder: (context) => ContactForm(),
+                builder: (context) => const ContactForm(),
               ),
             )
                 .then((value) {
               setState(() {});
             });
           },
-          child: Icon(Icons.add),
+          child: const Icon(Icons.add),
         ));
   }
 }
@@ -79,11 +81,11 @@ class _ContactItem extends StatelessWidget {
       child: ListTile(
         title: Text(
           contact.name,
-          style: TextStyle(fontSize: 24),
+          style: const TextStyle(fontSize: 24),
         ),
         subtitle: Text(
           contact.accountNumber.toString(),
-          style: TextStyle(fontSize: 16),
+          style: const TextStyle(fontSize: 16),
         ),
       ),
     );

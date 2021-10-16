@@ -8,7 +8,6 @@ void main() {
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -25,7 +24,7 @@ class BytebankApp extends StatelessWidget {
           ),
         ),
       ),
-      home: Dashboard(),
+      home: const Dashboard(),
     );
   }
 }
