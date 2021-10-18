@@ -1,3 +1,4 @@
+import 'package:bytebank/components/components.dart';
 import 'package:bytebank/database/dao/contact_dao.dart';
 import 'package:bytebank/models/models.dart';
 import 'package:bytebank/screens/screens.dart';
@@ -17,7 +18,7 @@ class _ContactsListState extends State<ContactsList> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text('Contacts'),
+          title: const Text('Transfer'),
         ),
         body: FutureBuilder<List<Contact>>(
           initialData: const [],
@@ -27,30 +28,29 @@ class _ContactsListState extends State<ContactsList> {
               case ConnectionState.none:
               case ConnectionState.active:
               case ConnectionState.waiting:
-                return Center(
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: const [
-                      CircularProgressIndicator(),
-                      Text('Loading...'),
-                    ],
-                  ),
-                );
+                return const Progress();
               case ConnectionState.done:
-                if (snapshot.hasData) {
-                  final List<Contact> contacts = snapshot.data ?? [];
-                  return ListView.builder(
-                    itemBuilder: (context, index) {
-                      final Contact contact = contacts[index];
-                      return _ContactItem(contact: contact);
-                    },
-                    itemCount: contacts.length,
-                  );
-                }
-                break;
+                final List<Contact> contacts = snapshot.data ?? [];
+                return ListView.builder(
+                  itemBuilder: (context, index) {
+                    final Contact contact = contacts[index];
+                    return _ContactItem(
+                      contact: contact,
+                      onClick: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                TransactionForm(contact: contact),
+                          ),
+                        );
+                      },
+                    );
+                  },
+                  itemCount: contacts.length,
+                );
+              default:
+                return const CenteredMessage(message: 'Unknow Error');
             }
-            return const Text('Unknow Error');
           },
         ),
         floatingActionButton: FloatingActionButton(
@@ -72,13 +72,16 @@ class _ContactsListState extends State<ContactsList> {
 
 class _ContactItem extends StatelessWidget {
   final Contact contact;
+  final Function onClick;
 
-  const _ContactItem({Key? key, required this.contact}) : super(key: key);
+  const _ContactItem({Key? key, required this.contact, required this.onClick})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       child: ListTile(
+        onTap: () => onClick(),
         title: Text(
           contact.name,
           style: const TextStyle(fontSize: 24),
