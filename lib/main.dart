@@ -1,10 +1,9 @@
 import 'package:bytebank/screens/screens.dart';
 import 'package:flutter/material.dart';
 
-
 void main() {
   runApp(const BytebankApp());
- }
+}
 
 class BytebankApp extends StatelessWidget {
   const BytebankApp({Key? key}) : super(key: key);

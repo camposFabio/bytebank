@@ -8,8 +8,7 @@ const String baseUrl = 'http://192.168.31.110:8080/transactions';
 class TransactionWebClient {
   Future<List<Transaction>> findAll() async {
     var url = Uri.parse(baseUrl);
-    final Response response =
-        await client.get(url).timeout(const Duration(seconds: 5));
+    final Response response = await client.get(url);
 
     final List<dynamic> decodedJson = jsonDecode(response.body);
 
@@ -18,7 +17,8 @@ class TransactionWebClient {
         .toList();
   }
 
-  Future<Transaction?> save({required Transaction transaction}) async {
+  Future<Transaction?> save(
+      {required Transaction transaction, String? password}) async {
     var url = Uri.parse(baseUrl);
 
     final String transactionJson = jsonEncode(transaction.toJson());
@@ -26,10 +26,33 @@ class TransactionWebClient {
     final Response response = await client.post(url,
         headers: {
           'Content-type': 'application/json',
-          'password': '1000',
+          'password': password ?? '',
         },
         body: transactionJson);
 
-    return Transaction.fromJson(jsonDecode(response.body));
+    if (response.statusCode == 200) {
+      return Transaction.fromJson(jsonDecode(response.body));
+    }
+
+    throw HttpException(_getMessage(response.statusCode));
   }
+
+  String? _getMessage(int statusCode) {
+    if (_statusCodeResponses.containsKey(statusCode)) {
+      return _statusCodeResponses[statusCode];
+    }
+    return 'Unknown Error';
+  }
+
+  static final Map<int, String> _statusCodeResponses = {
+    400: 'There was an error submitting transaction',
+    401: 'Authentication failed!',
+    409: 'Transaction already exists!'
+  };
+}
+
+class HttpException implements Exception {
+  final String? message;
+
+  HttpException(this.message);
 }
