@@ -1,7 +1,7 @@
 import 'dart:convert';
-import 'package:bytebank/http/web_client.dart';
-import 'package:bytebank/models/models.dart';
 import 'package:http/http.dart';
+import '../../http/web_client.dart';
+import '../../models/models.dart';
 
 const String baseUrl = 'http://192.168.31.110:8080/transactions';
 

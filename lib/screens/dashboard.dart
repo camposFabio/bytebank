@@ -1,10 +1,10 @@
-import 'package:bytebank/components/components.dart';
-import 'package:bytebank/models/models.dart';
-import 'package:bytebank/screens/contacts_list.dart';
-import 'package:bytebank/screens/name.dart';
-import 'package:bytebank/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../components/components.dart';
+import '../models/models.dart';
+import '../screens/contacts_list.dart';
+import './screens.dart';
 
 class DashboardContainer extends BlocContainer {
   const DashboardContainer({Key? key}) : super(key: key);

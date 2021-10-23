@@ -1,7 +1,7 @@
-import 'package:bytebank/components/components.dart';
-import 'package:bytebank/models/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import '../components/components.dart';
+import '../models/models.dart';
 
 class NameContainer extends BlocContainer {
   const NameContainer({Key? key}) : super(key: key);

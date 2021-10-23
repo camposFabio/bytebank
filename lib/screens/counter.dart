@@ -1,6 +1,7 @@
-import 'package:bytebank/components/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../components/components.dart';
 
 // Exemplo de contador utilizando Bloc em duas variações
 class CounterCubit extends Cubit<int> {

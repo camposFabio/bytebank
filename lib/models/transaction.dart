@@ -1,4 +1,4 @@
-import 'package:bytebank/models/models.dart';
+import './models.dart';
 
 class Transaction {
   final String _id;

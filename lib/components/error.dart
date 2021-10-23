@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'centered_message.dart';
 
 class ErrorView extends StatelessWidget {
   final String message;
@@ -10,6 +11,6 @@ class ErrorView extends StatelessWidget {
         appBar: AppBar(
           title: const Text('Processing'),
         ),
-        body: Text(message));
+        body: CenteredMessage(message: message));
   }
 }

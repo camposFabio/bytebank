@@ -1,7 +1,8 @@
-import 'package:bytebank/components/components.dart';
-import 'package:bytebank/http/web_clients/transaction_web_cliente.dart';
-import 'package:bytebank/models/models.dart';
 import 'package:flutter/material.dart';
+
+import '../components/components.dart';
+import '../http/web_clients/transaction_web_cliente.dart';
+import '../models/models.dart';
 
 class TransactionsList extends StatelessWidget {
   const TransactionsList({Key? key}) : super(key: key);

@@ -1,6 +1,7 @@
-import 'package:bytebank/models/models.dart';
-import 'package:sqflite/sqflite.dart';
+import '../../models/models.dart';
 import '../app_database.dart';
+
+import 'package:sqflite/sqflite.dart';
 
 class ContactDao {
   static const String _tableName = 'contacts';

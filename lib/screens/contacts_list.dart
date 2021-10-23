@@ -1,9 +1,10 @@
-import 'package:bytebank/components/components.dart';
-import 'package:bytebank/database/dao/contact_dao.dart';
-import 'package:bytebank/models/models.dart';
-import 'package:bytebank/screens/screens.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import '../components/components.dart';
+import '../database/dao/contact_dao.dart';
+import '../models/models.dart';
+import './screens.dart';
 
 @immutable
 class ContactsListState {
