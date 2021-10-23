@@ -1,8 +1,22 @@
 import 'package:bytebank/screens/screens.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'components/components.dart';
 
 void main() {
   runApp(const BytebankApp());
+}
+
+class LogObserver extends BlocObserver {
+  @override
+  void onChange(BlocBase bloc, Change change) {
+    if (kDebugMode) {
+      print('${bloc.runtimeType} > $change');
+    }
+    super.onChange(bloc, change);
+  }
 }
 
 class BytebankApp extends StatelessWidget {
@@ -10,21 +24,12 @@ class BytebankApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Bloc.observer = LogObserver();
+
     return MaterialApp(
-      theme: ThemeData(
-        primaryColor: Colors.green.shade900,
-        colorScheme: ColorScheme.fromSwatch().copyWith(
-          primary: Colors.green.shade900,
-          secondary: Colors.blueAccent.shade700,
-        ),
-        elevatedButtonTheme: ElevatedButtonThemeData(
-          style: ButtonStyle(
-            backgroundColor:
-                MaterialStateProperty.all<Color>(Colors.blueAccent.shade700),
-          ),
-        ),
-      ),
-      home: const Dashboard(),
+      theme: bytebanktheme,
+      home: const DashboardContainer(),
+      //const Dashboard(),
     );
   }
 }
