@@ -1,3 +1,3 @@
 export 'contact.dart';
 export 'transaction.dart';
-export 'name.dart';
+export 'name_cubit.dart';

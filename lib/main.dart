@@ -1,9 +1,10 @@
-import 'package:bytebank/screens/screens.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'components/components.dart';
+import './components/components.dart';
+import './components/localization/locale.dart';
+import './screens/dashboard/dashboard_container.dart';
 
 void main() {
   runApp(const BytebankApp());
@@ -28,7 +29,7 @@ class BytebankApp extends StatelessWidget {
 
     return MaterialApp(
       theme: bytebanktheme,
-      home: const DashboardContainer(),
+      home: const LocalizationContainer(child: DashboardContainer()),
       //const Dashboard(),
     );
   }

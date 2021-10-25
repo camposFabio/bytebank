@@ -1,8 +1,10 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:uuid/uuid.dart';
 
+import '../components/progress/progress_view.dart';
 import '../components/components.dart';
 import '../http/web_clients/transaction_web_cliente.dart';
 import '../models/models.dart';

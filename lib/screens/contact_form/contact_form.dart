@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import '../database/dao/contact_dao.dart';
-import '../models/models.dart';
+import '../../database/dao/contact_dao.dart';
+import '../../models/models.dart';
 
 class ContactForm extends StatefulWidget {
   const ContactForm({Key? key}) : super(key: key);
