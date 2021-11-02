@@ -1,26 +1,25 @@
+import 'package:bytebank/components/localization/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/components.dart';
-import '../../database/dao/contact_dao.dart';
-import 'contacts_list_cubit.dart';
-import 'contacts_list_view.dart';
+import 'contacts_list.dart';
 
 class ContactsListContainer extends BlocContainer {
   const ContactsListContainer({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final ContactDao dao = ContactDao();
-
     return BlocProvider<ContactsListCubit>(
-        create: (context) {
-          final ContactsListCubit cubit = ContactsListCubit();
-          cubit.reload(dao);
-          return cubit;
-        },
-        child: ContactsListView(
-          dao: dao,
-        ));
+      create: (context) {
+        final ContactsListCubit cubit = ContactsListCubit();
+        cubit.reload();
+        return cubit;
+      },
+      child: I18nLoadingContainer(
+        viewKey: "dashboard",
+        creator: (I18nMessages messages) => ContactsListView(messages),
+      ),
+    );
   }
 }

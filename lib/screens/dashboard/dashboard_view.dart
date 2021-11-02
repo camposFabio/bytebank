@@ -1,15 +1,15 @@
+import 'package:bytebank/components/localization/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/components.dart';
 import '../../models/models.dart';
-import '../contacts_list/contacts_list.dart';
+import '../contacts_list/contacts_list_container.dart';
 import '../screens.dart';
 import 'dashboard_feature_item.dart';
-import 'dashboard_i18n.dart';
 
 class DashboardView extends StatelessWidget {
-  final DashboardViewLazyi18n _i18n;
+  final I18nMessages _i18n;
 
   const DashboardView(this._i18n, {Key? key}) : super(key: key);
 
@@ -19,7 +19,7 @@ class DashboardView extends StatelessWidget {
       appBar: AppBar(
         // misturando um blockbuilder (que é um observador de eventos) com UI
         title: BlocBuilder<NameCubit, String>(
-          builder: (context, state) => Text('${_i18n.welcome} $state'),
+          builder: (context, state) => Text('${_i18n.get("welcome")} $state'),
         ),
       ),
       body: ListView(
@@ -30,7 +30,18 @@ class DashboardView extends StatelessWidget {
             children: [
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Image.asset('images/bytebank_logo.png'),
+                child: Container(
+                    clipBehavior: Clip.hardEdge,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(30),
+                      boxShadow: [
+                        BoxShadow(
+                            color: Colors.grey.shade600,
+                            offset: const Offset(4, 8),
+                            blurRadius: 5),
+                      ],
+                    ),
+                    child: Image.asset('images/bytebank_logo.png')),
               ),
               SizedBox(
                 height: 120,
@@ -38,17 +49,17 @@ class DashboardView extends StatelessWidget {
                   scrollDirection: Axis.horizontal,
                   children: [
                     FeatureItem(
-                      name: _i18n.transfer,
+                      name: _i18n.get('transfer'),
                       icon: Icons.monetization_on,
                       onClick: () => _showContactsList(context),
                     ),
                     FeatureItem(
-                      name: _i18n.transactionFeed,
+                      name: _i18n.get('transactionFeed'),
                       icon: Icons.description,
                       onClick: () => _showTransactionsList(context),
                     ),
                     FeatureItem(
-                      name: _i18n.changeName,
+                      name: _i18n.get('changeName'),
                       icon: Icons.person_outline,
                       onClick: () => _showChangeName(context),
                     ),
@@ -80,7 +91,7 @@ class DashboardView extends StatelessWidget {
   void _showTransactionsList(BuildContext blocContext) {
     Navigator.of(blocContext).push(
       MaterialPageRoute(
-        builder: (context) => const TransactionsList(),
+        builder: (context) => const TransactionsListContainer(),
       ),
     );
   }

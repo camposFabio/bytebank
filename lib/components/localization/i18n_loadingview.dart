@@ -3,11 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../progress/progress_view.dart';
 import '../components.dart';
-import 'i18n_cubit.dart';
-import 'i18n_messages.dart';
-import 'i18n_state.dart';
-
-//typedef Widget I18nWidgetCreator(I18nMessages messages);
+import 'i18n.dart';
 
 typedef I18nWidgetCreator = Widget Function(I18nMessages messages);
 
@@ -17,7 +13,7 @@ class I18nLoadingView extends StatelessWidget {
   const I18nLoadingView(this.creator, {Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<I18nMessagesCubit, I18nMessagesStare>(
+    return BlocBuilder<I18nMessagesCubit, I18nMessagesState>(
         builder: (context, state) {
       if (state is InitI18nMessagesState || state is LoadingI18nMessagesState) {
         return const ProgressView(message: 'Loading...');

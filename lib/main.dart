@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import './components/components.dart';
-import './components/localization/locale.dart';
 import './screens/dashboard/dashboard_container.dart';
+import 'components/localization/i18n.dart';
 
 void main() {
   runApp(const BytebankApp());
@@ -29,8 +29,7 @@ class BytebankApp extends StatelessWidget {
 
     return MaterialApp(
       theme: bytebanktheme,
-      home: const LocalizationContainer(child: DashboardContainer()),
-      //const Dashboard(),
+      home: const DashboardContainer(),
     );
   }
 }

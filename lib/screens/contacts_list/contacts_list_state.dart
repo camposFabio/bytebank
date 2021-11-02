@@ -7,13 +7,13 @@ class ContactsListState {
 }
 
 @immutable
-class LoadingContactsListState extends ContactsListState {
-  const LoadingContactsListState();
+class InitContactsListState extends ContactsListState {
+  const InitContactsListState();
 }
 
 @immutable
-class InitContactsListState extends ContactsListState {
-  const InitContactsListState();
+class LoadingContactsListState extends ContactsListState {
+  const LoadingContactsListState();
 }
 
 @immutable

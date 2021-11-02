@@ -10,11 +10,14 @@ class TransactionWebClient {
     var url = Uri.parse(baseUrl);
     final Response response = await client.get(url);
 
-    final List<dynamic> decodedJson = jsonDecode(response.body);
+    if (response.statusCode == 200) {
+      final List<dynamic> decodedJson = jsonDecode(response.body);
 
-    return decodedJson
-        .map((dynamic json) => Transaction.fromJson(json))
-        .toList();
+      return decodedJson
+          .map((dynamic json) => Transaction.fromJson(json))
+          .toList();
+    }
+    throw HttpException(_getMessage(response.statusCode));
   }
 
   Future<Transaction?> save(

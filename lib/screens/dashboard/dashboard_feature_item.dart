@@ -17,12 +17,22 @@ class FeatureItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: Material(
-        color: Theme.of(context).primaryColor,
+        //color: Theme.of(context).backgroundColor,
         child: InkWell(
           onTap: () => onClick(),
           child: Container(
+            clipBehavior: Clip.hardEdge,
             padding: const EdgeInsets.all(8.0),
-            //height: 100,
+            decoration: BoxDecoration(
+              color: Theme.of(context).primaryColor,
+              borderRadius: BorderRadius.circular(10),
+              boxShadow: [
+                BoxShadow(
+                    color: Colors.grey.shade600,
+                    offset: const Offset(4, 8),
+                    blurRadius: 5),
+              ],
+            ),
             width: 150,
             child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,

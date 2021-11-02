@@ -4,6 +4,7 @@ class I18nMessages {
 
   String get(String key) {
     assert(_messages.containsKey(key));
+
     return _messages[key] ?? '';
   }
 }

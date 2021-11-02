@@ -10,13 +10,13 @@ class LocalizationContainer extends BlocContainer {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider<CurrentLocaleCubit>(
-      create: (context) => CurrentLocaleCubit(),
+    return BlocProvider<LocalizationCubit>(
+      create: (context) => LocalizationCubit(),
       child: child,
     );
   }
 }
 
-class CurrentLocaleCubit extends Cubit<String> {
-  CurrentLocaleCubit() : super("en");
+class LocalizationCubit extends Cubit<String> {
+  LocalizationCubit() : super("en");
 }

@@ -1,24 +1,23 @@
+import 'package:bytebank/components/localization/i18n.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../components/components.dart';
 import '../../models/models.dart';
-import '../../database/dao/contact_dao.dart';
+
 import '../../screens/screens.dart';
-import 'contact_item.dart';
-import 'contacts_list_cubit.dart';
-import 'contacts_list_state.dart';
+import 'contacts_list.dart';
 
 class ContactsListView extends StatelessWidget {
-  final ContactDao dao;
+  final I18nMessages _i18n;
 
-  const ContactsListView({Key? key, required this.dao}) : super(key: key);
+  const ContactsListView(this._i18n, {Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Transfer'),
+        title: Text(_i18n.get('transfer')),
       ),
       body: BlocBuilder<ContactsListCubit, ContactsListState>(
         builder: (context, state) {
@@ -64,6 +63,6 @@ class ContactsListView extends StatelessWidget {
   }
 
   void update(BuildContext context) {
-    context.read<ContactsListCubit>().reload(dao);
+    context.read<ContactsListCubit>().reload();
   }
 }
